@@ -7,7 +7,7 @@ import static java.lang.System.out;
 import static java.lang.System.err;
 
 public class Analytics{
-    private int numberOfShares, totalAssets, totalLiabilities, netIncome, dividendsPayable;
+    private long numberOfShares, totalAssets, totalLiabilities, netIncome, dividendsPayable;
     private double sharePrice, fiftyTwoWeekHigh, fiftyTwoWeekLow, pricePerBook, pricePerEarnings, dividendPercentage, dividendSaftey;
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Analytics{
             try {
                 out.println("Enter the total number of shares floated: ");
                 String input = scanner.nextLine();
-                analytics.setNumberOfShares(Integer.parseInt(input));
+                analytics.setNumberOfShares(Long.parseLong(input));
 
                 out.println("Enter the share price: ");
                 input = scanner.nextLine();
@@ -36,19 +36,19 @@ public class Analytics{
 
                 out.println("Enter the total assets: ");
                 input = scanner.nextLine();
-                analytics.setTotalAssets(Integer.parseInt(input));
+                analytics.setTotalAssets(Long.parseLong(input));
 
                 out.println("Enter the total liabilities: ");
                 input = scanner.nextLine();
-                analytics.setTotalLiabilities(Integer.parseInt(input));
+                analytics.setTotalLiabilities(Long.parseLong(input));
 
                 out.println("Enter the net income over the last 12 months: ");
                 input = scanner.nextLine();
-                analytics.setNetIncome(Integer.parseInt(input));
+                analytics.setNetIncome(Long.parseLong(input));
 
                 out.println("Enter the dividends payable: ");
                 input = scanner.nextLine();
-                analytics.setDividendsPayable(Integer.parseInt(input));
+                analytics.setDividendsPayable(Long.parseLong(input));
                 break;
             } catch (NumberFormatException e) {
                 err.println("You have entered a non-numerical character, " +
@@ -72,43 +72,43 @@ public class Analytics{
         Application.launch(PriceGaugeBarGraph.class);
     }
 
-    public int getNumberOfShares() {
+    public long getNumberOfShares() {
         return numberOfShares;
     }
 
-    public void setNumberOfShares(int numberOfShares) {
+    public void setNumberOfShares(long numberOfShares) {
         this.numberOfShares = numberOfShares;
     }
 
-    public int getTotalAssets() {
+    public long getTotalAssets() {
         return totalAssets;
     }
 
-    public void setTotalAssets(int totalAssets) {
+    public void setTotalAssets(long totalAssets) {
         this.totalAssets = totalAssets;
     }
 
-    public int getTotalLiabilities() {
+    public long getTotalLiabilities() {
         return totalLiabilities;
     }
 
-    public void setTotalLiabilities(int totalLiabilities) {
+    public void setTotalLiabilities(long totalLiabilities) {
         this.totalLiabilities = totalLiabilities;
     }
 
-    public int getNetIncome() {
+    public long getNetIncome() {
         return netIncome;
     }
 
-    public void setNetIncome(int netIncome) {
+    public void setNetIncome(long netIncome) {
         this.netIncome = netIncome;
     }
 
-    public int getDividendsPayable() {
+    public long getDividendsPayable() {
         return dividendsPayable;
     }
 
-    public void setDividendsPayable(int dividendsPayable) {
+    public void setDividendsPayable(long dividendsPayable) {
         this.dividendsPayable = dividendsPayable;
     }
 
@@ -140,7 +140,7 @@ public class Analytics{
         return pricePerBook;
     }
 
-    public void setPricePerBook(int shares, double price, double assets, double liabilities) {
+    public void setPricePerBook(long shares, double price, double assets, double liabilities) {
         try{
             pricePerBook = (shares * price) / (assets - liabilities);
         } catch (ArithmeticException e) {
@@ -152,7 +152,7 @@ public class Analytics{
         return pricePerEarnings;
     }
 
-    public void setPricePerEarnings(int shares, double price, int income) {
+    public void setPricePerEarnings(long shares, double price, long income) {
         try {
             pricePerEarnings = (shares * price) / income;
         } catch (ArithmeticException e) {
@@ -164,7 +164,7 @@ public class Analytics{
         return dividendPercentage;
     }
 
-    public void setDividendPercentage(int payable, int shares, double price) {
+    public void setDividendPercentage(long payable, long shares, double price) {
         try {
             dividendPercentage = payable / (shares * price);
         } catch (ArithmeticException e) {
@@ -176,7 +176,7 @@ public class Analytics{
         return dividendSaftey;
     }
 
-    public void setDividendSaftey(int payable, int income) {
+    public void setDividendSaftey(long payable, long income) {
         try {
             dividendSaftey = payable / income;
         } catch (ArithmeticException e) {
