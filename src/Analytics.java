@@ -1,10 +1,9 @@
 /**
  * Created by gareth on 23/11/16.
  */
+import javafx.application.Application;
 import java.util.Scanner;
-
 import static java.lang.System.out;
-import static java.lang.System.console;
 import static java.lang.System.err;
 
 public class Analytics{
@@ -66,6 +65,11 @@ public class Analytics{
         analytics.setDividendSaftey(analytics.getDividendsPayable(), analytics.getNetIncome());
 
         analytics.printValues();
+        PriceGaugeBarGraph graph = new PriceGaugeBarGraph();
+        graph.setHigh(analytics.getFiftyTwoWeekHigh());
+        graph.setCurrent(analytics.getSharePrice());
+        graph.setLow(analytics.getFiftyTwoWeekLow());
+        Application.launch(PriceGaugeBarGraph.class);
     }
 
     public int getNumberOfShares() {
