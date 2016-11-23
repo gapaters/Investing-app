@@ -1,5 +1,25 @@
 #!/usr/bin/env python3.5
 
+import numpy
+import matplotlib.pyplot as pyplot
+
+
+def high_low_current_graph(high, low, current):
+    ind = numpy.arange(1)
+    width = 0.5
+    fig, ax = pyplot.subplots()
+    ax.bar(ind, high, width, color='r')
+    ax.bar(ind + 1, current, width, color='g')
+    ax.bar(ind + 2, low, width, color='b')
+
+    ax.set_ylabel('Price')
+    ax.set_title('52 Week Price Comparison')
+    ax.set_xticks((0.25, 1.25, 2.25))
+    ax.set_xticklabels(('52 Week High', 'Current', '52 Week low'))
+
+    pyplot.show()
+
+
 print(
     'This is a lightweight script for generating simple investing analytics.' +
     '\nPlease enter the following information as numerical values.\n')
@@ -58,5 +78,7 @@ while True:
     print('The price/earnings is', price_per_earnings)
     print('The dividends percentage is', dividend_percentage)
     print('The dividend safety is', dividend_safety)
+    high_low_current_graph(
+        fifty_two_week_high, fifty_two_week_low, share_price)
     input('Press any key to quit')
     break
