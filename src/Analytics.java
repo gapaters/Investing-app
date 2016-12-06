@@ -8,7 +8,7 @@ import static java.lang.System.err;
 
 public class Analytics{
     private long numberOfShares, totalAssets, totalLiabilities, netIncome, dividendsPayable;
-    private double sharePrice, fiftyTwoWeekHigh, fiftyTwoWeekLow, pricePerBook, pricePerEarnings, dividendPercentage, dividendSaftey;
+    private double sharePrice, fiftyTwoWeekHigh, fiftyTwoWeekLow, pricePerBook, pricePerEarnings, dividendPercentage, dividendSafety;
 
     public static void main(String[] args) {
         Analytics analytics = new Analytics();
@@ -62,7 +62,7 @@ public class Analytics{
                 analytics.getNetIncome());
         analytics.setDividendPercentage(analytics.getDividendsPayable(), analytics.getNumberOfShares(),
                 analytics.getSharePrice());
-        analytics.setDividendSaftey(analytics.getDividendsPayable(), analytics.getNetIncome());
+        analytics.setdividendSafety(analytics.getDividendsPayable(), analytics.getNetIncome());
 
         analytics.printValues();
         PriceGaugeBarGraph graph = new PriceGaugeBarGraph();
@@ -172,15 +172,15 @@ public class Analytics{
         }
     }
 
-    public double getDividendSaftey() {
-        return dividendSaftey;
+    public double getdividendSafety() {
+        return dividendSafety;
     }
 
-    public void setDividendSaftey(long payable, long income) {
+    public void setdividendSafety(long payable, long income) {
         try {
-            dividendSaftey = payable / income;
+            dividendSafety = payable / income;
         } catch (ArithmeticException e) {
-            dividendSaftey = Double.NaN;
+            dividendSafety = Double.NaN;
         }
     }
 
@@ -203,7 +203,7 @@ public class Analytics{
             out.printf("The dividend percentage is %f\n", dividendPercentage);
         }
 
-        if (Double.isNaN(dividendSaftey) || Double.isInfinite(dividendSaftey)) {
+        if (Double.isNaN(dividendSafety) || Double.isInfinite(dividendSafety)) {
             out.println("The dividend safety is undefined");
         } else {
             out.printf("The dividend safety is %f\n", dividendPercentage);
