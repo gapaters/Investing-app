@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by gareth on 06/12/16.
  */
-public class analyticsGUI {
+public class AnalyticsGUI {
     private JPanel mainWindow;
     private JLabel numberOfSharesLabel;
     private JTextField numberOfSharesInput;
@@ -46,14 +46,14 @@ public class analyticsGUI {
     Analytics analytics = new Analytics();
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("analyticsGUI");
-        frame.setContentPane(new analyticsGUI().mainWindow);
+        JFrame frame = new JFrame("AnalyticsGUI");
+        frame.setContentPane(new AnalyticsGUI().mainWindow);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public analyticsGUI() {
+    public AnalyticsGUI() {
         numberOfSharesEnter.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 analytics.setNumberOfShares(Long.parseLong(numberOfSharesInput.getText()));
