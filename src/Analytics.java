@@ -148,6 +148,14 @@ public class Analytics{
         }
     }
 
+    public void setPricePerBook() {
+        try{
+            pricePerBook = (numberOfShares * sharePrice) / (totalAssets - totalLiabilities);
+        } catch (ArithmeticException e) {
+            pricePerBook = Double.NaN;
+        }
+    }
+
     public double getPricePerEarnings() {
         return pricePerEarnings;
     }
@@ -155,6 +163,14 @@ public class Analytics{
     public void setPricePerEarnings(long shares, double price, long income) {
         try {
             pricePerEarnings = (shares * price) / income;
+        } catch (ArithmeticException e) {
+            pricePerEarnings = Double.NaN;
+        }
+    }
+
+    public void setPricePerEarnings() {
+        try {
+            pricePerEarnings = (numberOfShares * sharePrice) / netIncome;
         } catch (ArithmeticException e) {
             pricePerEarnings = Double.NaN;
         }
@@ -172,6 +188,14 @@ public class Analytics{
         }
     }
 
+    public void setDividendPercentage() {
+        try {
+            dividendPercentage = dividendsPayable / (numberOfShares * sharePrice);
+        } catch (ArithmeticException e) {
+            dividendPercentage = Double.NaN;
+        }
+    }
+
     public double getdividendSafety() {
         return dividendSafety;
     }
@@ -179,6 +203,14 @@ public class Analytics{
     public void setdividendSafety(long payable, long income) {
         try {
             dividendSafety = payable / income;
+        } catch (ArithmeticException e) {
+            dividendSafety = Double.NaN;
+        }
+    }
+
+    public void setdividendSafety() {
+        try {
+            dividendSafety = dividendsPayable / netIncome;
         } catch (ArithmeticException e) {
             dividendSafety = Double.NaN;
         }
