@@ -1,5 +1,4 @@
-import com.sun.javafx.application.PlatformImpl;
-import javafx.application.Application;
+import com.jimmoores.quandl.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -8,9 +7,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import org.threeten.bp.LocalDate;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormat;
@@ -20,7 +21,7 @@ import java.util.Date;
 /**
  * Created by gareth on 06/12/16.
  */
-public class AnalyticsGUI extends JPanel{
+public class AnalyticsGUI{
     private JPanel mainWindow;
     private JLabel numberOfSharesLabel;
     private JTextField numberOfSharesInput;
@@ -57,6 +58,9 @@ public class AnalyticsGUI extends JPanel{
     private JLabel dividendPercentageResult;
     private JLabel dividendSafetyLabel;
     private JLabel dividendsSafetyResult;
+    private JTextField quandlSearch;
+    private JButton quandlEnter;
+    private JTable quandlResults;
 
     Analytics analytics = new Analytics();
     static JFrame frame;
@@ -130,6 +134,40 @@ public class AnalyticsGUI extends JPanel{
                         barGraph.setVisible(true);
                     }
                 });
+            }
+        });
+        quandlEnter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                QuandlSession session = QuandlSession.create();
+                TabularResult tabularResult = session.getDataSet(
+                        DataSetRequest.Builder.of(quandlSearch.getText())
+                                .withFrequency(Frequency.ANNUAL)
+                                .withStartDate(LocalDate.of(2015,1,1))
+                                .build()
+                );
+                String[] columnNames = {"Date", "Open", "High", "Low", "Close", "Volume"};
+                Object[] data = {};
+                tabularResult.getHeaderDefinition();
+                LocalDate date;
+                Double open, high, low, close, volume;
+                System.out.println(tabularResult.toPrettyPrintedString());
+                for(final Row row : tabularResult){
+                    date =  row.getLocalDate("Date");
+                    System.out.println(date.toString());
+                    open = row.getDouble("Open");
+                    high = row.getDouble("High");
+                    low = row.getDouble("Low");
+                    close = row.getDouble("Close");
+                    volume = row.getDouble("Volume");
+                    data = new Object[] {date, open, high, low, close, volume};
+                    System.out.println(data[0]);
+                }
+                DefaultTableModel model = (DefaultTableModel) quandlResults.getModel();
+                model.setColumnIdentifiers(columnNames);
+                model.addRow(data);
+                //quandlResults.setVisible(true);
+                //quandlResults = new JTable(data,columnNames);
             }
         });
     }
